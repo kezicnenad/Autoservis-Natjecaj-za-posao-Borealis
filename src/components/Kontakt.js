@@ -7,7 +7,7 @@ function Kontakt({ handleScreen }) {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
-              Kontakt
+              Vaši kontakt podaci
             </h5>
             <button
               type="button"
@@ -20,17 +20,17 @@ function Kontakt({ handleScreen }) {
           <div className="modal-footer">
             <button
               type="button"
-              className="btn btn-secondary"
-              data-bs-dismiss="modal"
+              className="btn btn-primary"
+              onClick={() => handleScreen(2)}
             >
-              Close
+              Nazad
             </button>
             <button
               type="button"
               className="btn btn-primary"
-              onClick={() => handleScreen(5)}
+              onClick={() => handleScreen(4)}
             >
-              Save changes
+              Dalje
             </button>
           </div>
         </div>

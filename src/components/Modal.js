@@ -1,13 +1,20 @@
 import React from 'react';
 
 import Vozilo from './Vozilo';
-import  Usluge from './Usluge';
-import UslugeUkupno from './UslugeUkupno';
+import Usluge from './Usluge';
 import Kontakt from './Kontakt';
 import Pregled from './Pregled';
 import Poslano from './Poslano';
 
-function Modal({handleScreen, screen}) {
+function Modal({
+  handleScreen,
+  screen,
+  vozila,
+  odabranoVozilo,
+  handleVozilo,
+  usluge,
+  handleUsluge,
+}) {
   return (
     <div>
       <button
@@ -28,17 +35,19 @@ function Modal({handleScreen, screen}) {
         aria-hidden="true"
       >
         {screen === 1 ? (
-          <Vozilo handleScreen={handleScreen} />
+          <Vozilo
+            handleScreen={handleScreen}
+            vozila={vozila}
+            handleVozilo={handleVozilo}
+          />
         ) : screen === 2 ? (
-          <Usluge handleScreen={handleScreen} />
+          <Usluge handleScreen={handleScreen} usluge={usluge} handleUsluge={handleUsluge} />
         ) : screen === 3 ? (
-          <UslugeUkupno handleScreen={handleScreen} />
-        ) : screen === 4 ? (
           <Kontakt handleScreen={handleScreen} />
-        ) : screen === 5 ? (
+        ) : screen === 4 ? (
           <Pregled handleScreen={handleScreen} />
         ) : (
-          screen === 6 && <Poslano handleScreen={handleScreen} />
+          screen === 5 && <Poslano handleScreen={handleScreen} />
         )}
       </div>
     </div>

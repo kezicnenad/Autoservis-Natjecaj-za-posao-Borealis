@@ -20,10 +20,10 @@ function Poslano({ handleScreen }) {
           <div className="modal-footer">
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn btn-primary"
               data-bs-dismiss="modal"
             >
-              Close
+              Zatvori
             </button>
           </div>
         </div>

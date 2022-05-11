@@ -7,7 +7,7 @@ function Pregled({ handleScreen }) {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
-              Pregled
+              Pregled i potvrda vašeg odabira
             </h5>
             <button
               type="button"
@@ -20,17 +20,18 @@ function Pregled({ handleScreen }) {
           <div className="modal-footer">
             <button
               type="button"
-              className="btn btn-secondary"
-              data-bs-dismiss="modal"
+              className="btn btn-primary"
+              onClick={() => handleScreen(3)}
             >
-              Close
+              Nazad
             </button>
+
             <button
               type="button"
               className="btn btn-primary"
-              onClick={() => handleScreen(6)}
+              onClick={() => handleScreen(5)}
             >
-              Save changes
+              Dalje
             </button>
           </div>
         </div>
