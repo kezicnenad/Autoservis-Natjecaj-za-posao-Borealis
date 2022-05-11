@@ -4,17 +4,19 @@ import './App.css';
 
 function App() {
 
-  const [screenVozilo, setScreenVozilo] = useState(false);
-  const [screenUsluge, setScreenUsluge] = useState(false);
-  const [screenUslugeUkupno, setScreenUslugeUkupno] = useState(false);
-  const [screenKontakt, setScreenKontakt] = useState(false);
-  const [screenPregled, setScreenPregled] = useState(false);
-  const [screenPoslano, setScreenPoslano] = useState(false);
+  const [screen, setScreen] = useState(1);
+
+  const handleScreen = (num) => {
+    setScreen(num);
+  }
 
   return (
     <div className="App">
       <h1>App</h1>
-      <Modal />
+      <Modal
+        handleScreen={handleScreen}
+        screen={screen}
+      />
     </div>
   );
 }

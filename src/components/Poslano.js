@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
-function Vozilo({handleScreen}) {
+function Poslano({ handleScreen }) {
   return (
     <div>
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
-              Vozilo
+              Poslano
             </h5>
             <button
               type="button"
@@ -25,9 +25,6 @@ function Vozilo({handleScreen}) {
             >
               Close
             </button>
-            <button type="button" className="btn btn-primary" onClick={() => handleScreen(2)}>
-              Save changes
-            </button>
           </div>
         </div>
       </div>
@@ -35,4 +32,4 @@ function Vozilo({handleScreen}) {
   );
 }
 
-export default Vozilo;
+export default Poslano;
