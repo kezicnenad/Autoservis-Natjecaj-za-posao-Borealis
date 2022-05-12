@@ -12,6 +12,7 @@ export const kuponUsedContext = createContext();
 export const kuponOkContext = createContext();
 export const provjeriKuponContext = createContext(); 
 export const useKuponContext = createContext();
+export const handleKuponOkContext = createContext();
 
 function App() {
 
@@ -78,7 +79,6 @@ function App() {
 
   const [kuponUsed, setKuponUsed] = useState(false);
   const [kuponOk, setKuponOk] = useState(false);
-  const [input, setInput] = useState("");
 
   const handleScreen = (num) => {
     setScreen(num);
@@ -112,27 +112,21 @@ function App() {
     return suma;
   };
 
-  const provjeriKupon = () => {
-    // setKuponUsed(false);
-    if (input === kupon) {
-      setKuponOk(true);
-    } else {
-      setKuponOk(false);
-    }
-    setInput("");
-  };
+  const useKupon = (used) => {
+    setKuponUsed(used);
+  }
 
-  const useKupon = () => {
-    setKuponUsed(true);
+  const handleKuponOk = () => {
+    setKuponOk(true);
   }
 
   return (
     <div className="App">
       <h1>App</h1>
-      <useKuponContext.Provider value={useKupon}>
-        <kuponUsedContext.Provider value={kuponUsed}>
-          <kuponOkContext.Provider value={kuponOk}>
-            <provjeriKuponContext.Provider value={provjeriKupon}>
+      <handleKuponOkContext.Provider value={handleKuponOk}>
+        <useKuponContext.Provider value={useKupon}>
+          <kuponUsedContext.Provider value={kuponUsed}>
+            <kuponOkContext.Provider value={kuponOk}>
               <kuponContext.Provider value={kupon}>
                 <uslugeSumaContext.Provider value={uslugeSuma}>
                   <handleUslugeContext.Provider value={handleUsluge}>
@@ -148,10 +142,10 @@ function App() {
                   </handleUslugeContext.Provider>
                 </uslugeSumaContext.Provider>
               </kuponContext.Provider>
-            </provjeriKuponContext.Provider>
-          </kuponOkContext.Provider>
-        </kuponUsedContext.Provider>
-      </useKuponContext.Provider>
+            </kuponOkContext.Provider>
+          </kuponUsedContext.Provider>
+        </useKuponContext.Provider>
+      </handleKuponOkContext.Provider>
     </div>
   );
 }

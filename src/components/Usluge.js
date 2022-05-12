@@ -1,5 +1,14 @@
 import React, { useContext, useState } from "react";
-import { uslugeContext, handleUslugeContext, uslugeSumaContext, kuponContext, kuponUsedContext, kuponOkContext, provjeriKuponContext, useKuponContext } from '../App';
+import {
+  uslugeContext,
+  handleUslugeContext,
+  uslugeSumaContext,
+  kuponContext,
+  kuponUsedContext,
+  kuponOkContext,
+  useKuponContext,
+  handleKuponOkContext
+} from "../App";
 
 function Usluge({ handleScreen }) {
 
@@ -10,12 +19,23 @@ function Usluge({ handleScreen }) {
 
   const kuponUsed = useContext(kuponUsedContext);
   const kuponOk = useContext(kuponOkContext);
-  const provjeriKupon = useContext(provjeriKuponContext);
   const useKupon = useContext(useKuponContext);
+  const handleKuponOk = useContext(handleKuponOkContext);
 
+  const [input, setInput] = useState("");
 
   const handlePotvrdi = (e) => {
     handleScreen(3);
+  };
+
+  const provjeriKupon = () => {
+    // setKuponUsed(false);
+    if (input === kupon) {
+      handleKuponOk(true);
+    } else {
+      handleKuponOk(false);
+    }
+    setInput("");
   };
 
   return (
@@ -79,8 +99,8 @@ function Usluge({ handleScreen }) {
                         type="text"
                         placeholder="Kupon"
                         name="kupon"
-                        // value={input}
-                        // onChange={(e) => setInput(e.target.value)}
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
                       />
                       <button
                         style={{ marginTop: 20 }}
