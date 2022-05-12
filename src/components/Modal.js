@@ -24,7 +24,7 @@ function Modal({
         data-bs-target="#exampleModal"
         onClick={() => handleScreen(1)}
       >
-        Launch demo modal
+        Pokreni konfigurator
       </button>
 
       <div

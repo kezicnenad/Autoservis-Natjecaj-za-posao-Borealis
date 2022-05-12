@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { vozilaContext, handleOdaberiVoziloContext } from '../App';
 
-function Vozilo({ handleScreen, vozila, handleVozilo }) {
-  const [odabir, setOdabir] = useState('');
+function Vozilo({ handleScreen }) {
 
-  const handleOdabir = () => {
-    handleVozilo(odabir);
+  const vozila = useContext(vozilaContext);
+  const handleOdaberiVozilo = useContext(handleOdaberiVoziloContext);
+
+  const [odabrano, setOdabrano] = useState();
+
+  const handleOdabir = (id) => {
+    setOdabrano(id);
+  };
+
+  const handlePotvrdi = (e) => {
+    e.preventDefault();
+    handleOdaberiVozilo(odabrano);
     handleScreen(2);
   };
 
@@ -32,37 +42,34 @@ function Vozilo({ handleScreen, vozila, handleVozilo }) {
                     type="radio"
                     name="flexRadioDefault"
                     id="flexRadioDefault1"
-                    value={vozilo.id}
-                    onClick={(e) => setOdabir(e.target.value)}
+                    onClick={() => handleOdabir(vozilo.id)}
                   />
+                  {vozilo.naziv}
                   <label
                     className="form-check-label"
                     htmlFor="flexRadioDefault1"
-                  >
-                    {vozilo.naziv}
-                  </label>
+                  ></label>
                 </div>
               ))}
           </div>
           <div className="modal-footer">
-            {odabir && odabir !== "" ? (
+            {odabrano && odabrano !== "" ? (
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => handleOdabir()}
+                onClick={(e) => handlePotvrdi(e)}
               >
                 Dalje
               </button>
-            ) : (
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => handleOdabir()}
-                disabled
-              >
-                Dalje
-              </button>
-            )}
+            ) :
+            (<button
+              type="button"
+              className="btn btn-primary"
+              onClick={(e) => handlePotvrdi(e)}
+              disabled
+            >
+              Dalje
+            </button>)}
           </div>
         </div>
       </div>

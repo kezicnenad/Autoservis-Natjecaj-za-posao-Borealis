@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import { uslugeContext } from '../App';
 
-function Usluge({ handleScreen, usluge, handleUsluge }) {
+function Usluge({ handleScreen }) {
 
+  const usluge = useContext(uslugeContext);
 
+  const handlePotvrdi = (e) => {
+    // e.preventDefault();
+    // handleOdaberiVozilo(odabrano);
+    // handleScreen(3);
+  };
 
   return (
     <div>
@@ -22,35 +29,18 @@ function Usluge({ handleScreen, usluge, handleUsluge }) {
           <div className="modal-body">
             {usluge &&
               usluge.map((usluga) => (
-                <div
-                  className="form-check"
-                  key={usluga.id}
-                  onClick={(e) => handleUsluge(usluga.id)}
-                >
-                  {usluga.odabrano === true ? (
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                      checked
-                      onChange={(e) => {}}
-                    />
-                  ) : (
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      value=""
-                      id="flexCheckDefault"
-                      onChange={(e) => {}}
-                    />
-                  )}
+                <div className="form-check" key={usluga.id}>
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                  />
                   <label
                     className="form-check-label"
                     htmlFor="flexCheckDefault"
                   >
-                    {usluge && usluga.naziv_usluge}{" "}
-                    {usluge && usluga.cijena} kn
+                    {usluga.naziv_usluge}
                   </label>
                 </div>
               ))}
@@ -64,14 +54,10 @@ function Usluge({ handleScreen, usluge, handleUsluge }) {
               Nazad
             </button>
 
-            {usluge.filter((usluga) => usluga.odabrano === true).length > 0
-              ? "da"
-              : "ne"}
-
             <button
               type="button"
               className="btn btn-primary"
-              onClick={() => handleScreen(3)}
+              onClick={(e) => handlePotvrdi(e)}
             >
               Dalje
             </button>
