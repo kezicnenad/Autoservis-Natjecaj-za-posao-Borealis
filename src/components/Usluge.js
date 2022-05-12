@@ -1,15 +1,10 @@
 import React, { useContext, useState } from "react";
-import { uslugeContext } from '../App';
+import { uslugeContext, handleUslugeContext } from '../App';
 
 function Usluge({ handleScreen }) {
 
   const usluge = useContext(uslugeContext);
-
-  const [odabrano, setOdabrano] = useState([]);
-
-  const handleOdabir = (id) => {
-    console.log(id);
-  }
+  const handleUsluge = useContext(handleUslugeContext);
 
   const handlePotvrdi = (e) => {
     // e.preventDefault();
@@ -41,13 +36,15 @@ function Usluge({ handleScreen }) {
                     type="checkbox"
                     value=""
                     id="flexCheckDefault"
-                    onClick={(e)=>handleOdabir(usluga.id)}
+                    onChange={() => handleUsluge(usluga.id)}
+                    checked={usluga.odabrano}
                   />
                   <label
                     className="form-check-label"
                     htmlFor="flexCheckDefault"
                   >
-                    {usluga.naziv_usluge}
+                    {usluga && usluga.naziv_usluge}{" "}
+                    {usluga && usluga.cijena.toFixed(2)} kn
                   </label>
                 </div>
               ))}

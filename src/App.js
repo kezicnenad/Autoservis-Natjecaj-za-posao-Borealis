@@ -5,6 +5,7 @@ import './App.css';
 export const vozilaContext = createContext();
 export const uslugeContext = createContext();
 export const handleOdaberiVoziloContext = createContext();
+export const handleUslugeContext = createContext();
 
 function App() {
 
@@ -27,31 +28,37 @@ function App() {
       id: 1,
       naziv_usluge: "Zamjena ulja i filtera",
       cijena: 500,
+      odabrano: false,
     },
     {
       id: 2,
       naziv_usluge: "Promjena pakni",
       cijena: 450,
+      odabrano: false,
     },
     {
       id: 3,
       naziv_usluge: "Promjena guma",
       cijena: 100,
+      odabrano: false,
     },
     {
       id: 4,
       naziv_usluge: "Servis klima uređaja",
       cijena: 299,
+      odabrano: false,
     },
     {
       id: 5,
       naziv_usluge: "Balansiranje guma",
       cijena: 50,
+      odabrano: false
     },
     {
       id: 6,
       naziv_usluge: "Zamjena ulja u kočnicama",
       cijena: 229,
+      odabrano: false,
     },
   ]);
   const [kupon, setKupon] = useState('Tokić123');
@@ -65,23 +72,29 @@ function App() {
 
   const handleScreen = (num) => {
     setScreen(num);
-  }
+  };
 
   const handleOdaberiVozilo = (id) => {
-    const filter = vozila.filter(vozilo => vozilo.id === id);
+    const filter = vozila.filter((vozilo) => vozilo.id === id);
     setOdabranoVozilo(filter);
-  }
+  };
+
+  const handleUsluge = (id) => {
+    console.log(id);
+  };
 
   return (
     <div className="App">
       <h1>App</h1>
-      <handleOdaberiVoziloContext.Provider value={handleOdaberiVozilo}>
-        <vozilaContext.Provider value={vozila}>
-          <uslugeContext.Provider value={usluge}>
-            <Modal handleScreen={handleScreen} screen={screen} />
-          </uslugeContext.Provider>
-        </vozilaContext.Provider>
-      </handleOdaberiVoziloContext.Provider>
+      <handleUslugeContext.Provider value={handleUsluge}>
+        <handleOdaberiVoziloContext.Provider value={handleOdaberiVozilo}>
+          <vozilaContext.Provider value={vozila}>
+            <uslugeContext.Provider value={usluge}>
+              <Modal handleScreen={handleScreen} screen={screen} />
+            </uslugeContext.Provider>
+          </vozilaContext.Provider>
+        </handleOdaberiVoziloContext.Provider>
+      </handleUslugeContext.Provider>
     </div>
   );
 }
