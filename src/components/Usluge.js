@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { uslugeContext, handleUslugeContext, uslugeSumaContext, kuponContext, kuponUsedContext, kuponOkContext, provjeriKuponContext } from '../App';
+import { uslugeContext, handleUslugeContext, uslugeSumaContext, kuponContext, kuponUsedContext, kuponOkContext, provjeriKuponContext, useKuponContext } from '../App';
 
 function Usluge({ handleScreen }) {
 
@@ -11,6 +11,7 @@ function Usluge({ handleScreen }) {
   const kuponUsed = useContext(kuponUsedContext);
   const kuponOk = useContext(kuponOkContext);
   const provjeriKupon = useContext(provjeriKuponContext);
+  const useKupon = useContext(useKuponContext);
 
 
   const handlePotvrdi = (e) => {
@@ -64,7 +65,7 @@ function Usluge({ handleScreen }) {
               {kuponUsed === false ? (
                 <button
                   className="btn btn-sm btn-primary"
-                  // onClick={() => setKuponUsed(true)}
+                  onClick={useKupon}
                 >
                   Imam kupon
                 </button>
@@ -105,11 +106,11 @@ function Usluge({ handleScreen }) {
               ) : (
                 <>
                   <p>
-                    Osnovica:{" "}
-                    <b>{usluge && uslugeSuma().toFixed(2)} kn</b>
+                    Osnovica: <b>{usluge && uslugeSuma().toFixed(2)} kn</b>
                   </p>
                   <p>
-                    Popust (30%): <b>-{usluge && (uslugeSuma() * 0.3).toFixed(2)} kn</b>
+                    Popust (30%):{" "}
+                    <b>-{usluge && (uslugeSuma() * 0.3).toFixed(2)} kn</b>
                   </p>
                   <p>
                     Ukupno:{" "}
