@@ -7,9 +7,7 @@ function Usluge({ handleScreen }) {
   const handleUsluge = useContext(handleUslugeContext);
 
   const handlePotvrdi = (e) => {
-    // e.preventDefault();
-    // handleOdaberiVozilo(odabrano);
-    // handleScreen(3);
+    handleScreen(3);
   };
 
   return (
@@ -29,14 +27,14 @@ function Usluge({ handleScreen }) {
           </div>
           <div className="modal-body">
             {usluge &&
-              usluge.map((usluga) => (
-                <div className="form-check" key={usluga.id}>
+              usluge.map((usluga, index) => (
+                <div className="form-check" key={index}>
                   <input
                     className="form-check-input"
                     type="checkbox"
                     value=""
                     id="flexCheckDefault"
-                    onChange={() => handleUsluge(usluga.id)}
+                    onChange={() => handleUsluge(usluga.id, usluga.naziv_usluge, usluga.cijena)}
                     checked={usluga.odabrano}
                   />
                   <label

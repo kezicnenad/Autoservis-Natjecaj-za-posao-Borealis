@@ -79,8 +79,17 @@ function App() {
     setOdabranoVozilo(filter);
   };
 
-  const handleUsluge = (id) => {
-    console.log(id);
+  const handleUsluge = (id, naziv, cijena) => {
+
+    const ostale = usluge.filter((usluga) => usluga.id !== id);
+    const filter = usluge.filter((usluga) => usluga.id === id);
+    const filtrat = filter[0];
+
+    if (filtrat.odabrano === false){
+      setUsluge([...ostale, {id: id, naziv_usluge: naziv, cijena: cijena, odabrano: true}]);
+    } else {
+      setUsluge([...ostale, { id: id, naziv_usluge: naziv, cijena: cijena, odabrano: false }]);
+    }
   };
 
   return (
