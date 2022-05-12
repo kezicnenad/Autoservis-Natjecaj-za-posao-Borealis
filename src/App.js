@@ -6,6 +6,8 @@ export const vozilaContext = createContext();
 export const uslugeContext = createContext();
 export const handleOdaberiVoziloContext = createContext();
 export const handleUslugeContext = createContext();
+export const uslugeSumaContext = createContext();
+export const kuponContext = createContext();
 
 function App() {
 
@@ -92,18 +94,32 @@ function App() {
     }
   };
 
+  const uslugeSuma = () => {
+    let suma = 0;
+    usluge
+      .filter((usluga) => usluga.odabrano === true)
+      .map((usluga) => {
+        suma += usluga.cijena;
+      });
+    return suma;
+  };
+
   return (
     <div className="App">
       <h1>App</h1>
-      <handleUslugeContext.Provider value={handleUsluge}>
-        <handleOdaberiVoziloContext.Provider value={handleOdaberiVozilo}>
-          <vozilaContext.Provider value={vozila}>
-            <uslugeContext.Provider value={usluge}>
-              <Modal handleScreen={handleScreen} screen={screen} />
-            </uslugeContext.Provider>
-          </vozilaContext.Provider>
-        </handleOdaberiVoziloContext.Provider>
-      </handleUslugeContext.Provider>
+      <kuponContext.Provider value={kupon}>
+        <uslugeSumaContext.Provider value={uslugeSuma}>
+          <handleUslugeContext.Provider value={handleUsluge}>
+            <handleOdaberiVoziloContext.Provider value={handleOdaberiVozilo}>
+              <vozilaContext.Provider value={vozila}>
+                <uslugeContext.Provider value={usluge}>
+                  <Modal handleScreen={handleScreen} screen={screen} />
+                </uslugeContext.Provider>
+              </vozilaContext.Provider>
+            </handleOdaberiVoziloContext.Provider>
+          </handleUslugeContext.Provider>{" "}
+        </uslugeSumaContext.Provider>
+      </kuponContext.Provider>
     </div>
   );
 }

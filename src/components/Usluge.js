@@ -1,14 +1,31 @@
 import React, { useContext, useState } from "react";
-import { uslugeContext, handleUslugeContext } from '../App';
+import { uslugeContext, handleUslugeContext, uslugeSumaContext, kuponContext } from '../App';
 
 function Usluge({ handleScreen }) {
 
   const usluge = useContext(uslugeContext);
   const handleUsluge = useContext(handleUslugeContext);
+  const uslugeSuma = useContext(uslugeSumaContext);
+  const kupon = useContext(kuponContext);
+
+  const [kuponUsed, setKuponUsed] = useState(false);
+  const [input, setInput] = useState('');
+  const [error, setError] = useState('');
+  const[kuponOk, setKuponOk] = useState(false);
 
   const handlePotvrdi = (e) => {
     handleScreen(3);
   };
+
+  const provjeriKupon = () => {
+    // setKuponUsed(false);
+    if (input === kupon){
+      setKuponOk(true);
+    } else {
+      setKuponOk(false);
+    }
+    setInput('');
+  }
 
   return (
     <div>
@@ -34,7 +51,13 @@ function Usluge({ handleScreen }) {
                     type="checkbox"
                     value=""
                     id="flexCheckDefault"
-                    onChange={() => handleUsluge(usluga.id, usluga.naziv_usluge, usluga.cijena)}
+                    onChange={() =>
+                      handleUsluge(
+                        usluga.id,
+                        usluga.naziv_usluge,
+                        usluga.cijena
+                      )
+                    }
                     checked={usluga.odabrano}
                   />
                   <label
@@ -46,6 +69,65 @@ function Usluge({ handleScreen }) {
                   </label>
                 </div>
               ))}
+
+            <div className="body-2 form-group">
+              {kuponUsed === false ? (
+                <button
+                  className="btn btn-sm btn-primary"
+                  onClick={() => setKuponUsed(true)}
+                >
+                  Imam kupon
+                </button>
+              ) : (
+                <>
+                  {kuponOk === false ? (
+                    <>
+                      <p>Kupon</p>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="Kupon"
+                        name="kupon"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                      />
+                      <button
+                        style={{ marginTop: 20 }}
+                        className="btn btn-sm btn-primary"
+                        onClick={() => provjeriKupon()}
+                      >
+                        Primjeni
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <p>Hvala vam, unijeli ste ispravan kod kupona</p>
+                    </>
+                  )}
+                </>
+              )}
+            </div>
+            <div className="body-2">
+              {kuponOk === false ? (
+                <p>
+                  Ukupno: <b>{usluge && uslugeSuma().toFixed(2)} kn</b>
+                </p>
+              ) : (
+                <>
+                  <p>
+                    Osnovica:{" "}
+                    <b>{usluge && uslugeSuma().toFixed(2)} kn</b>
+                  </p>
+                  <p>
+                    Popust (30%): <b>-{usluge && (uslugeSuma() * 0.3).toFixed(2)} kn</b>
+                  </p>
+                  <p>
+                    Ukupno:{" "}
+                    <b>{usluge && (uslugeSuma() * 0.7).toFixed(2)} kn</b>
+                  </p>
+                </>
+              )}
+            </div>
           </div>
           <div className="modal-footer">
             <button
