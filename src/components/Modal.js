@@ -16,7 +16,8 @@ function Modal({
   handleUsluge,
 }) {
   return (
-    <div>
+    <div className="container">
+      <h1>App</h1>
       <button
         type="button"
         className="btn btn-primary"
@@ -41,7 +42,11 @@ function Modal({
             handleVozilo={handleVozilo}
           />
         ) : screen === 2 ? (
-          <Usluge handleScreen={handleScreen} usluge={usluge} handleUsluge={handleUsluge} />
+          <Usluge
+            handleScreen={handleScreen}
+            usluge={usluge}
+            handleUsluge={handleUsluge}
+          />
         ) : screen === 3 ? (
           <Kontakt handleScreen={handleScreen} />
         ) : screen === 4 ? (

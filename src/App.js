@@ -180,7 +180,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>App</h1>
       <posaljiPodatkeContext.Provider value={posaljiPodatke}>
       <odabranoVoziloContext.Provider value={odabranoVozilo}>
         <handleSaveKontaktContext.Provider value={handleSaveKontakt}>
