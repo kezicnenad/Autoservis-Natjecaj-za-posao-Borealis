@@ -96,7 +96,7 @@ function Pregled({ handleScreen }) {
               <p>Ime i prezime: {kontakt.ime_i_prezime}</p>
               <p>Mail: {kontakt.mail}</p>
               <p>Telefon: {kontakt.telefon}</p>
-              <p>Napomena: {kontakt.napomena}</p>
+              {kontakt.napomena !== '' && <p>Napomena: {kontakt.napomena}</p>}
             </div>
           </div>
           <div className="modal-footer">
