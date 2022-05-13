@@ -73,11 +73,11 @@ function Pregled({ handleScreen }) {
                     </p>
                   ))}
               {kuponUsed === false ? (
-                <p>Ukupno: {uslugeSuma() + ",00kn"}</p>
+                <p>Ukupno: {uslugeSuma().toFixed(2) + "kn"}</p>
               ) : (
                 <>
-                  <p>Popust (30%): {uslugeSuma() * 0.3 + ",00kn"}</p>
-                  <p>Ukupno: {uslugeSuma() * 0.7+ ",00kn"}</p>
+                  <p>Popust (30%): {(uslugeSuma() * 0.3).toFixed(2) + "kn"}</p>
+                  <p>Ukupno: {(uslugeSuma() * 0.7).toFixed(2) + "kn"}</p>
                 </>
               )}
             </div>
