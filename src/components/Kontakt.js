@@ -1,6 +1,28 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { kontaktContext, handleSaveKontaktContext } from '../App';
 
 function Kontakt({ handleScreen }) {
+
+  const kontakt = useContext(kontaktContext);
+  const handleSaveKontakt = useContext(handleSaveKontaktContext);
+
+  const [imePrezime, setImePrezime] = useState("");
+  const [mail, setMail] = useState("");
+  const [telefon, setTelefon] = useState("");
+  const [napomena, setNapomena] = useState("");
+
+  useEffect(() => {
+    setImePrezime(kontakt.ime_i_prezime);
+    setMail(kontakt.mail);
+    setTelefon(kontakt.telefon);
+    setNapomena(kontakt.napomena);
+  }, []);
+
+  const saveKontakt = () => {
+    handleScreen(4);
+    handleSaveKontakt(imePrezime, mail, telefon, napomena);
+  }
+
   return (
     <div>
       <div className="modal-dialog">
@@ -16,7 +38,36 @@ function Kontakt({ handleScreen }) {
               aria-label="Close"
             ></button>
           </div>
-          <div className="modal-body">...</div>
+          <div className="modal-body form-group">
+            <input
+              type="text"
+              placeholder="Ime i prezime"
+              className="form-control unos"
+              value={imePrezime}
+              onChange={(e) => setImePrezime(e.target.value)}
+            />
+            <input
+              type="mail"
+              placeholder="Mail"
+              className="form-control unos"
+              value={mail}
+              onChange={(e) => setMail(e.target.value)}
+            />
+            <input
+              type="phone"
+              placeholder="Telefon"
+              className="form-control unos"
+              value={telefon}
+              onChange={(e) => setTelefon(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Napomena"
+              className="form-control unos"
+              value={napomena}
+              onChange={(e) => setNapomena(e.target.value)}
+            />
+          </div>
           <div className="modal-footer">
             <button
               type="button"
@@ -25,13 +76,22 @@ function Kontakt({ handleScreen }) {
             >
               Nazad
             </button>
-            <button
+            {(imePrezime !== '' && mail !== '' && telefon !== '') ? 
+            (<button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => saveKontakt()}
+            >
+              Dalje
+            </button>) : 
+            (<button
               type="button"
               className="btn btn-primary"
               onClick={() => handleScreen(4)}
+              disabled
             >
               Dalje
-            </button>
+            </button>)}
           </div>
         </div>
       </div>

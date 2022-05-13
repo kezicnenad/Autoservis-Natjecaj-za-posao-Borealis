@@ -108,7 +108,7 @@ function Usluge({ handleScreen }) {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                   />
-                  <p>{error}</p>
+                  <p className='error'>{error}</p>
                   <button
                     style={{ marginTop: 20 }}
                     className="btn btn-sm btn-primary"

@@ -10,6 +10,10 @@ export const uslugeSumaContext = createContext();
 export const kuponContext = createContext();
 export const kuponUsedContext = createContext();
 export const handleKuponContext = createContext();
+export const kontaktContext = createContext();
+export const handleSaveKontaktContext = createContext();
+export const odabranoVoziloContext = createContext();
+export const posaljiPodatkeContext = createContext();
 
 function App() {
 
@@ -111,28 +115,102 @@ function App() {
     setKuponUsed(true);
   }
 
+  const handleSaveKontakt = (ime, mail, telefon, napomena) => {
+    // console.log("IME", ime);
+    // console.log("MAIL", mail);
+    // console.log("TELEFON", telefon);
+    // console.log("NAPOMENA", napomena);
+    setKontakt({
+      ime_i_prezime: ime,
+      mail: mail,
+      telefon: telefon,
+      napomena: napomena
+    })
+  }
+
+  const posaljiPodatke = () => {
+    setUsluge([
+      {
+        id: 1,
+        naziv_usluge: "Zamjena ulja i filtera",
+        cijena: 500,
+        odabrano: false,
+      },
+      {
+        id: 2,
+        naziv_usluge: "Promjena pakni",
+        cijena: 450,
+        odabrano: false,
+      },
+      {
+        id: 3,
+        naziv_usluge: "Promjena guma",
+        cijena: 100,
+        odabrano: false,
+      },
+      {
+        id: 4,
+        naziv_usluge: "Servis klima uređaja",
+        cijena: 299,
+        odabrano: false,
+      },
+      {
+        id: 5,
+        naziv_usluge: "Balansiranje guma",
+        cijena: 50,
+        odabrano: false,
+      },
+      {
+        id: 6,
+        naziv_usluge: "Zamjena ulja u kočnicama",
+        cijena: 229,
+        odabrano: false,
+      },
+    ]);
+
+    setKontakt({
+      ime_i_prezime: "",
+      mail: "",
+      telefon: "",
+      napomena: "",
+    });
+    setOdabranoVozilo({});
+    setKuponUsed(false);
+  }
+
   return (
     <div className="App">
       <h1>App</h1>
-      <handleKuponContext.Provider value={handleKupon}>
-        <kuponUsedContext.Provider value={kuponUsed}>
-          <kuponContext.Provider value={kupon}>
-            <uslugeSumaContext.Provider value={uslugeSuma}>
-              <handleUslugeContext.Provider value={handleUsluge}>
-                <handleOdaberiVoziloContext.Provider
-                  value={handleOdaberiVozilo}
-                >
-                  <vozilaContext.Provider value={vozila}>
-                    <uslugeContext.Provider value={usluge}>
-                      <Modal handleScreen={handleScreen} screen={screen} />
-                    </uslugeContext.Provider>
-                  </vozilaContext.Provider>
-                </handleOdaberiVoziloContext.Provider>
-              </handleUslugeContext.Provider>
-            </uslugeSumaContext.Provider>
-          </kuponContext.Provider>
-        </kuponUsedContext.Provider>
-      </handleKuponContext.Provider>
+      <posaljiPodatkeContext.Provider value={posaljiPodatke}>
+      <odabranoVoziloContext.Provider value={odabranoVozilo}>
+        <handleSaveKontaktContext.Provider value={handleSaveKontakt}>
+          <kontaktContext.Provider value={kontakt}>
+            <handleKuponContext.Provider value={handleKupon}>
+              <kuponUsedContext.Provider value={kuponUsed}>
+                <kuponContext.Provider value={kupon}>
+                  <uslugeSumaContext.Provider value={uslugeSuma}>
+                    <handleUslugeContext.Provider value={handleUsluge}>
+                      <handleOdaberiVoziloContext.Provider
+                        value={handleOdaberiVozilo}
+                      >
+                        <vozilaContext.Provider value={vozila}>
+                          <uslugeContext.Provider value={usluge}>
+                            <Modal
+                              handleScreen={handleScreen}
+                              screen={screen}
+                            />
+                          </uslugeContext.Provider>
+                        </vozilaContext.Provider>
+                      </handleOdaberiVoziloContext.Provider>
+                    </handleUslugeContext.Provider>
+                  </uslugeSumaContext.Provider>
+                </kuponContext.Provider>
+              </kuponUsedContext.Provider>
+            </handleKuponContext.Provider>
+          </kontaktContext.Provider>
+        </handleSaveKontaktContext.Provider>
+      </odabranoVoziloContext.Provider>
+      </posaljiPodatkeContext.Provider>
     </div>
   );
 }
