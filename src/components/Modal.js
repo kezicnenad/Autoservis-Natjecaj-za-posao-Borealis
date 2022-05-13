@@ -16,17 +16,21 @@ function Modal({
   handleUsluge,
 }) {
   return (
-    <div className="container p-5 text-center">
-      <p>Pritisnite gumb kako biste pokrenuli konfigurator</p>
-      <button
-        type="button"
-        className="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-        onClick={() => handleScreen(1)}
-      >
-        Pokreni konfigurator
-      </button>
+    <div className="container p-5">
+      <p className="text-center">
+        Pritisnite gumb kako biste pokrenuli konfigurator
+      </p>
+      <p className="text-center">
+        <button
+          type="button"
+          className="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          onClick={() => handleScreen(1)}
+        >
+          Pokreni konfigurator
+        </button>
+      </p>
 
       <div
         className="modal fade"
