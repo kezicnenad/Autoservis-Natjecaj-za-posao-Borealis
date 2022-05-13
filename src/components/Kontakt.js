@@ -47,7 +47,7 @@ function Kontakt({ handleScreen }) {
               onChange={(e) => setImePrezime(e.target.value)}
             />
             <input
-              type="mail"
+              type="email"
               placeholder="Mail"
               className="form-control unos"
               value={mail}

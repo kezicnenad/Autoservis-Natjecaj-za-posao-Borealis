@@ -180,35 +180,40 @@ function App() {
 
   return (
     <div className="App">
+      <div class="p-5 text-center bg-light">
+        <h1 class="mb-3">TOKIĆ</h1>
+        <h2 class="mb-3">Konfigurator servisa</h2>
+        <h4 class="mb-3">Izračunajte trošak servisa</h4>
+      </div>
       <posaljiPodatkeContext.Provider value={posaljiPodatke}>
-      <odabranoVoziloContext.Provider value={odabranoVozilo}>
-        <handleSaveKontaktContext.Provider value={handleSaveKontakt}>
-          <kontaktContext.Provider value={kontakt}>
-            <handleKuponContext.Provider value={handleKupon}>
-              <kuponUsedContext.Provider value={kuponUsed}>
-                <kuponContext.Provider value={kupon}>
-                  <uslugeSumaContext.Provider value={uslugeSuma}>
-                    <handleUslugeContext.Provider value={handleUsluge}>
-                      <handleOdaberiVoziloContext.Provider
-                        value={handleOdaberiVozilo}
-                      >
-                        <vozilaContext.Provider value={vozila}>
-                          <uslugeContext.Provider value={usluge}>
-                            <Modal
-                              handleScreen={handleScreen}
-                              screen={screen}
-                            />
-                          </uslugeContext.Provider>
-                        </vozilaContext.Provider>
-                      </handleOdaberiVoziloContext.Provider>
-                    </handleUslugeContext.Provider>
-                  </uslugeSumaContext.Provider>
-                </kuponContext.Provider>
-              </kuponUsedContext.Provider>
-            </handleKuponContext.Provider>
-          </kontaktContext.Provider>
-        </handleSaveKontaktContext.Provider>
-      </odabranoVoziloContext.Provider>
+        <odabranoVoziloContext.Provider value={odabranoVozilo}>
+          <handleSaveKontaktContext.Provider value={handleSaveKontakt}>
+            <kontaktContext.Provider value={kontakt}>
+              <handleKuponContext.Provider value={handleKupon}>
+                <kuponUsedContext.Provider value={kuponUsed}>
+                  <kuponContext.Provider value={kupon}>
+                    <uslugeSumaContext.Provider value={uslugeSuma}>
+                      <handleUslugeContext.Provider value={handleUsluge}>
+                        <handleOdaberiVoziloContext.Provider
+                          value={handleOdaberiVozilo}
+                        >
+                          <vozilaContext.Provider value={vozila}>
+                            <uslugeContext.Provider value={usluge}>
+                              <Modal
+                                handleScreen={handleScreen}
+                                screen={screen}
+                              />
+                            </uslugeContext.Provider>
+                          </vozilaContext.Provider>
+                        </handleOdaberiVoziloContext.Provider>
+                      </handleUslugeContext.Provider>
+                    </uslugeSumaContext.Provider>
+                  </kuponContext.Provider>
+                </kuponUsedContext.Provider>
+              </handleKuponContext.Provider>
+            </kontaktContext.Provider>
+          </handleSaveKontaktContext.Provider>
+        </odabranoVoziloContext.Provider>
       </posaljiPodatkeContext.Provider>
     </div>
   );

@@ -16,8 +16,8 @@ function Modal({
   handleUsluge,
 }) {
   return (
-    <div className="container">
-      <h1>App</h1>
+    <div className="container p-5 text-center">
+      <p>Pritisnite gumb kako biste pokrenuli konfigurator</p>
       <button
         type="button"
         className="btn btn-primary"
