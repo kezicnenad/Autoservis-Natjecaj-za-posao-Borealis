@@ -9,10 +9,7 @@ export const handleUslugeContext = createContext();
 export const uslugeSumaContext = createContext();
 export const kuponContext = createContext();
 export const kuponUsedContext = createContext();
-export const kuponOkContext = createContext();
-export const provjeriKuponContext = createContext(); 
-export const useKuponContext = createContext();
-export const handleKuponOkContext = createContext();
+export const handleKuponContext = createContext();
 
 function App() {
 
@@ -76,9 +73,7 @@ function App() {
     napomena: ''
   });
   const [odabranoVozilo, setOdabranoVozilo] = useState({});
-
   const [kuponUsed, setKuponUsed] = useState(false);
-  const [kuponOk, setKuponOk] = useState(false);
 
   const handleScreen = (num) => {
     setScreen(num);
@@ -112,40 +107,32 @@ function App() {
     return suma;
   };
 
-  const useKupon = (used) => {
-    setKuponUsed(used);
-  }
-
-  const handleKuponOk = () => {
-    setKuponOk(true);
+  const handleKupon = () => {
+    setKuponUsed(true);
   }
 
   return (
     <div className="App">
       <h1>App</h1>
-      <handleKuponOkContext.Provider value={handleKuponOk}>
-        <useKuponContext.Provider value={useKupon}>
-          <kuponUsedContext.Provider value={kuponUsed}>
-            <kuponOkContext.Provider value={kuponOk}>
-              <kuponContext.Provider value={kupon}>
-                <uslugeSumaContext.Provider value={uslugeSuma}>
-                  <handleUslugeContext.Provider value={handleUsluge}>
-                    <handleOdaberiVoziloContext.Provider
-                      value={handleOdaberiVozilo}
-                    >
-                      <vozilaContext.Provider value={vozila}>
-                        <uslugeContext.Provider value={usluge}>
-                          <Modal handleScreen={handleScreen} screen={screen} />
-                        </uslugeContext.Provider>
-                      </vozilaContext.Provider>
-                    </handleOdaberiVoziloContext.Provider>
-                  </handleUslugeContext.Provider>
-                </uslugeSumaContext.Provider>
-              </kuponContext.Provider>
-            </kuponOkContext.Provider>
-          </kuponUsedContext.Provider>
-        </useKuponContext.Provider>
-      </handleKuponOkContext.Provider>
+      <handleKuponContext.Provider value={handleKupon}>
+        <kuponUsedContext.Provider value={kuponUsed}>
+          <kuponContext.Provider value={kupon}>
+            <uslugeSumaContext.Provider value={uslugeSuma}>
+              <handleUslugeContext.Provider value={handleUsluge}>
+                <handleOdaberiVoziloContext.Provider
+                  value={handleOdaberiVozilo}
+                >
+                  <vozilaContext.Provider value={vozila}>
+                    <uslugeContext.Provider value={usluge}>
+                      <Modal handleScreen={handleScreen} screen={screen} />
+                    </uslugeContext.Provider>
+                  </vozilaContext.Provider>
+                </handleOdaberiVoziloContext.Provider>
+              </handleUslugeContext.Provider>
+            </uslugeSumaContext.Provider>
+          </kuponContext.Provider>
+        </kuponUsedContext.Provider>
+      </handleKuponContext.Provider>
     </div>
   );
 }

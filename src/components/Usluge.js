@@ -5,9 +5,7 @@ import {
   uslugeSumaContext,
   kuponContext,
   kuponUsedContext,
-  kuponOkContext,
-  useKuponContext,
-  handleKuponOkContext
+  handleKuponContext
 } from "../App";
 
 function Usluge({ handleScreen }) {
@@ -16,13 +14,12 @@ function Usluge({ handleScreen }) {
   const handleUsluge = useContext(handleUslugeContext);
   const uslugeSuma = useContext(uslugeSumaContext);
   const kupon = useContext(kuponContext);
-
   const kuponUsed = useContext(kuponUsedContext);
-  const kuponOk = useContext(kuponOkContext);
-  const useKupon = useContext(useKuponContext);
-  const handleKuponOk = useContext(handleKuponOkContext);
+  const handleKupon = useContext(handleKuponContext);
 
   const [input, setInput] = useState("");
+  const [kuponInUse, setKuponInUse] = useState(false);
+  const [error, setError] = useState('');
 
   const handlePotvrdi = (e) => {
     handleScreen(3);
@@ -31,12 +28,23 @@ function Usluge({ handleScreen }) {
   const provjeriKupon = () => {
     // setKuponUsed(false);
     if (input === kupon) {
-      handleKuponOk(true);
+      console.log('');
+      handleKupon();
+      setError();
     } else {
-      handleKuponOk(false);
+      setError('Nevažeći kupon');
     }
     setInput("");
   };
+
+  const provjera = () => {
+    const filter = usluge.filter((usluga) => usluga.odabrano === true);
+    if (filter.length > 0){ 
+      return true;
+      } else {
+        return false;
+      };
+  }
 
   return (
     <div>
@@ -82,44 +90,42 @@ function Usluge({ handleScreen }) {
               ))}
 
             <div className="body-2 form-group">
-              {kuponUsed === false ? (
+              {kuponInUse === false && kuponUsed === false ? (
                 <button
                   className="btn btn-sm btn-primary"
-                  onClick={useKupon}
+                  onClick={() => setKuponInUse(true)}
                 >
                   Imam kupon
                 </button>
+              ) : kuponUsed === false ? (
+                <>
+                  <p>Kupon</p>
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Kupon"
+                    name="kupon"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                  />
+                  <p>{error}</p>
+                  <button
+                    style={{ marginTop: 20 }}
+                    className="btn btn-sm btn-primary"
+                    onClick={() => provjeriKupon()}
+                  >
+                    Primjeni
+                  </button>
+                </>
               ) : (
                 <>
-                  {kuponOk === false ? (
-                    <>
-                      <p>Kupon</p>
-                      <input
-                        className="form-control"
-                        type="text"
-                        placeholder="Kupon"
-                        name="kupon"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                      />
-                      <button
-                        style={{ marginTop: 20 }}
-                        className="btn btn-sm btn-primary"
-                        onClick={() => provjeriKupon()}
-                      >
-                        Primjeni
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <p>Hvala vam, unijeli ste ispravan kod kupona</p>
-                    </>
-                  )}
+                  <p>Hvala vam, unijeli ste ispravan kod kupona</p>
                 </>
               )}
             </div>
+
             <div className="body-2">
-              {kuponOk === false ? (
+              {kuponUsed === false ? (
                 <p>
                   Ukupno: <b>{usluge && uslugeSuma().toFixed(2)} kn</b>
                 </p>
@@ -149,13 +155,25 @@ function Usluge({ handleScreen }) {
               Nazad
             </button>
 
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={(e) => handlePotvrdi(e)}
-            >
-              Dalje
-            </button>
+            {provjera() ? (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={(e) => handlePotvrdi(e)}
+              >
+                Dalje
+              </button>
+            ) :
+            (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={(e) => handlePotvrdi(e)}
+                disabled
+              >
+                Dalje
+              </button>
+            )}
           </div>
         </div>
       </div>
